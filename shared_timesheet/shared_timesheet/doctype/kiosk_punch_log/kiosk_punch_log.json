@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "autoname": "KPL-.YYYY.-.#####",
+ "creation": "2026-09-30 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "punch_time",
+  "action",
+  "worker",
+  "worker_name",
+  "auth_method",
+  "column_break_1",
+  "timesheet",
+  "wih_number",
+  "activity",
+  "device_user",
+  "section_photo",
+  "photo",
+  "column_break_2",
+  "details"
+ ],
+ "fields": [
+  {
+   "fieldname": "punch_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Action",
+   "options": "Start\nStop\nManual Entry\nEdit Entry\nDelete Entry\nSubmit\nFace Failed\nPIN Failed\nPIN Changed\nFace Registered\nFace Removed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "worker",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Worker",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "worker_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Worker Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "auth_method",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Verified By",
+   "options": "\nFace\nPIN",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "timesheet",
+   "fieldtype": "Link",
+   "label": "Employee Timesheet",
+   "options": "Employee Timesheet",
+   "read_only": 1
+  },
+  {
+   "fieldname": "wih_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "WIH",
+   "read_only": 1
+  },
+  {
+   "fieldname": "activity",
+   "fieldtype": "Data",
+   "label": "Activity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "device_user",
+   "fieldtype": "Link",
+   "label": "Device",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_photo",
+   "fieldtype": "Section Break",
+   "label": "Photo & Details"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo at Punch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Small Text",
+   "label": "Details",
+   "read_only": 1
+  }
+ ],
+ "image_field": "photo",
+ "in_create": 1,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-09-30 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Shared Timesheet",
+ "name": "Kiosk Punch Log",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 0,
+   "write": 0
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Timesheet Manager",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "sort_field": "punch_time",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
+}

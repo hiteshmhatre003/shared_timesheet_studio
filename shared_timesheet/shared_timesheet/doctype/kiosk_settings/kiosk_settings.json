@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "creation": "2026-09-30 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_signin",
+  "worker_session_seconds",
+  "max_pin_attempts",
+  "lockout_minutes",
+  "column_break_1",
+  "require_photo",
+  "section_rules",
+  "allow_manual_entries",
+  "one_timer_per_worker",
+  "section_face",
+  "face_enabled",
+  "face_strictness",
+  "require_blink",
+  "column_break_face",
+  "allow_pin_fallback",
+  "max_face_attempts"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_signin",
+   "fieldtype": "Section Break",
+   "label": "Worker Sign-in"
+  },
+  {
+   "default": "60",
+   "description": "After a worker enters their PIN, the kiosk returns to the name screen if nobody touches it for this long. 20 to 600.",
+   "fieldname": "worker_session_seconds",
+   "fieldtype": "Int",
+   "label": "Auto Sign-out After (seconds of no touch)"
+  },
+  {
+   "default": "5",
+   "fieldname": "max_pin_attempts",
+   "fieldtype": "Int",
+   "label": "Wrong PIN Attempts Before Lock"
+  },
+  {
+   "default": "15",
+   "fieldname": "lockout_minutes",
+   "fieldtype": "Int",
+   "label": "Lock Duration (minutes)"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "When ticked, a worker cannot sign in unless the tablet camera captures their photo. Recommended once you've confirmed the camera works on your tablet.",
+   "fieldname": "require_photo",
+   "fieldtype": "Check",
+   "label": "Require Photo at Every Sign-in"
+  },
+  {
+   "fieldname": "section_rules",
+   "fieldtype": "Section Break",
+   "label": "Timesheet Rules"
+  },
+  {
+   "default": "1",
+   "description": "When unticked, only a Timesheet Manager can add manual entries or change/delete time entries on the kiosk.",
+   "fieldname": "allow_manual_entries",
+   "fieldtype": "Check",
+   "label": "Allow Workers to Add / Edit / Delete Entries"
+  },
+  {
+   "default": "1",
+   "description": "Stops a worker from starting a new timer while one is still running on another WIH (prevents double-counting when someone forgets to stop).",
+   "fieldname": "one_timer_per_worker",
+   "fieldtype": "Check",
+   "label": "Only One Running Timer per Worker"
+  },
+  {
+   "fieldname": "section_face",
+   "fieldtype": "Section Break",
+   "label": "Face Recognition"
+  },
+  {
+   "default": "1",
+   "fieldname": "face_enabled",
+   "fieldtype": "Check",
+   "label": "Use Face Check for Workers with a Registered Face"
+  },
+  {
+   "default": "Normal",
+   "description": "Strict = fewer wrong matches but more 'not recognised'. Start with Normal.",
+   "fieldname": "face_strictness",
+   "fieldtype": "Select",
+   "label": "Face Match Strictness",
+   "options": "Strict\nNormal\nRelaxed"
+  },
+  {
+   "default": "1",
+   "fieldname": "require_blink",
+   "fieldtype": "Check",
+   "label": "Ask Worker to Blink (stops photos being held up)"
+  },
+  {
+   "fieldname": "column_break_face",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "description": "Every PIN sign-in is marked 'PIN' in Kiosk Punch Log so supervisors can review it. Timesheet Managers can always use their PIN.",
+   "fieldname": "allow_pin_fallback",
+   "fieldtype": "Check",
+   "label": "Allow PIN if Face Check Fails"
+  },
+  {
+   "default": "5",
+   "fieldname": "max_face_attempts",
+   "fieldtype": "Int",
+   "label": "Failed Face Checks Before Face Lock"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-09-30 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Shared Timesheet",
+ "name": "Kiosk Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 0,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Timesheet Manager",
+   "share": 0,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

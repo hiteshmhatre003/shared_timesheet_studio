@@ -1,0 +1,451 @@
+:root {
+  --bg: #eef0f2;
+  --card: #ffffff;
+  --ink: #1a1d23;
+  --sub: #6b7280;
+  --line: #dde1e6;
+  --accent-green: #1a9e46;
+  --accent-green-dark: #157a37;
+  --danger: #c0392b;
+  --radius: 10px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  height: 100%;
+  overscroll-behavior-y: contain;
+}
+
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+
+h1, h2, h3, .display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.topbar {
+  padding: calc(14px + var(--safe-top)) 18px 14px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  position: sticky; top: 0; z-index: 10;
+}
+.topbar .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.topbar .brand-logo { font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; color: var(--ink); }
+.topbar .brand-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); }
+.topbar .user-pill {
+  font-size: 11px; color: var(--sub); background: var(--bg);
+  padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);
+  max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.icon-btn {
+  border: 1px solid var(--line); background: #fff; border-radius: 8px;
+  padding: 8px 12px; font-size: 12px; font-weight: 700; color: var(--ink);
+  display: flex; align-items: center; gap: 6px; cursor: pointer;
+}
+
+/* ---------- Side drawer nav (hamburger menu) ---------- */
+.drawer-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+  z-index: 70;
+}
+.drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+.side-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 260px; max-width: 80vw;
+  background: #fff; z-index: 80; transform: translateX(-100%);
+  transition: transform 0.22s ease; box-shadow: 0 0 30px rgba(0,0,0,0.2);
+  display: flex; flex-direction: column; padding-top: var(--safe-top);
+}
+.side-drawer.open { transform: translateX(0); }
+.side-drawer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 18px 14px; border-bottom: 1px solid var(--line);
+}
+.drawer-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--sub); line-height: 1; }
+.side-drawer-nav { padding: 10px 0; }
+.drawer-link { padding: 14px 20px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; color: var(--ink); }
+.drawer-link:active { background: var(--bg); }
+
+.screen { flex: 1; padding: 18px; padding-bottom: calc(24px + var(--safe-bottom)); max-width: 520px; margin: 0 auto; width: 100%; }
+
+/* ---------- Login ---------- */
+.login-wrap { display: flex; flex-direction: column; align-items: center; padding-top: 10vh; }
+.login-header { text-align: center; margin-bottom: 26px; }
+.login-header h1 { font-size: 30px; }
+.login-header p { color: var(--sub); font-size: 12px; letter-spacing: 0.08em; margin-top: 6px; }
+.login-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  width: 100%; overflow: hidden;
+}
+.login-card .avatar {
+  width: 60px; height: 60px; border-radius: 50%; background: var(--ink);
+  display: flex; align-items: center; justify-content: center; margin: 26px auto 12px;
+  color: #fff; font-size: 22px;
+}
+.login-card h2 { text-align: center; font-size: 20px; }
+.login-card .sub { text-align: center; color: var(--sub); font-size: 11px; letter-spacing: 0.06em; margin: 6px 0 18px; }
+.login-body { border-top: 1px solid var(--line); padding: 22px 20px 26px; }
+label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; color: var(--ink); }
+input, select, textarea {
+  width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #fff; color: var(--ink);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+input[readonly] { background: var(--bg); color: var(--sub); }
+.field { margin-bottom: 16px; }
+.pw-wrap { position: relative; }
+.pw-wrap button { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 16px; }
+.btn {
+  width: 100%; padding: 15px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+  font-size: 14px;
+}
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:active { background: #000; }
+.btn-green { background: var(--accent-green); color: #fff; box-shadow: 0 8px 20px rgba(26,158,70,0.25); }
+.btn-green:active { background: var(--accent-green-dark); }
+.btn-red { background: #fff; color: var(--danger); border: 1px solid var(--danger); }
+.btn-outline { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.error-box { background: #fdecea; border: 1px solid #f5c2bd; color: var(--danger); padding: 10px 12px; border-radius: 8px; font-size: 12px; margin-bottom: 14px; }
+
+/* ---------- Dashboard ---------- */
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+.stat-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.stat-card .label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); margin-bottom: 8px; }
+.stat-card .value { font-family: 'Space Grotesk'; font-size: 18px; font-weight: 700; line-height: 1.25; }
+.section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.section-head h2 { font-size: 18px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.tab { flex: 1; text-align: center; padding: 10px; border-radius: 8px; border: 1px solid var(--line); background: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; }
+.tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.sheet-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer;
+}
+.sheet-card .wih { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; color: var(--sub); }
+.sheet-card .name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 16px; margin-top: 2px; }
+.sheet-card .meta { font-size: 11px; color: var(--sub); margin-top: 6px; }
+.sheet-card .right { text-align: right; }
+.right-top { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.status-pill { font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 20px; letter-spacing: 0.04em; display: inline-block; }
+.status-draft { background: #eef2ff; color: #3b4cca; }
+.status-submitted, .status-locked { background: #f1f2f4; color: var(--sub); }
+
+/* Small green dot on a dashboard card = this user personally has a timer
+   running on that timesheet right now (not a teammate's — see
+   is_running_for_me in list_timesheets). */
+.running-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+}
+.empty-state { text-align: center; padding: 40px 10px; color: var(--sub); font-size: 13px; }
+
+.pagination { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+.pagination-btn { width: auto; padding: 10px 16px; font-size: 12px; flex: 0 0 auto; }
+.pagination-btn:disabled { opacity: 0.4; cursor: default; }
+.page-indicator { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--sub); }
+
+.fab {
+  position: fixed; right: 20px; bottom: calc(20px + var(--safe-bottom));
+  background: var(--ink); color: #fff; border: none; border-radius: 30px;
+  padding: 15px 20px; font-family: 'Space Grotesk'; font-weight: 700;
+  font-size: 13px; text-transform: uppercase; box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  display: flex; align-items: center; gap: 8px; cursor: pointer; z-index: 20;
+}
+
+/* ---------- New Timesheet ---------- */
+.back-link { display: flex; align-items: center; gap: 6px; color: var(--sub); font-size: 12px; font-weight: 700; margin-bottom: 18px; cursor: pointer; background: none; border: none; padding: 0; }
+.form-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.form-card-head { padding: 20px 20px 16px; border-bottom: 1px solid var(--line); }
+.form-card-head h2 { font-size: 20px; }
+.form-card-head p { color: var(--sub); font-size: 11px; margin-top: 6px; letter-spacing: 0.05em; }
+.form-card-body { padding: 20px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* Native date/time inputs have their own minimum intrinsic width on phones
+   (especially iOS Safari) that doesn't reliably shrink to fit a half-width
+   grid column, causing them to overlap the next field. Stack to a single
+   column below ~420px so every field gets the full row. */
+@media (max-width: 420px) {
+  .two-col { grid-template-columns: 1fr; }
+
+  /* Two hour figures side by side (MY HOURS / TEAM TOTAL) don't reliably
+     fit next to the WIH info block on a narrow phone, especially now that
+     they read as "H Hrs M Mins" instead of a short decimal. Stack the
+     card into two rows and shrink the figures further. */
+  .wih-card { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .hours-block-group { width: 100%; justify-content: space-between; }
+  .wih-card .hours-lbl, .wih-card .hours-val { text-align: left; }
+  .wih-card .hours-val { font-size: 16px; }
+}
+
+/* ---------- Timer screen ---------- */
+.timer-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-top: calc(10px + var(--safe-top)); }
+.wih-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
+.wih-card .lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); }
+.wih-card .wih-name { font-family: 'Space Grotesk'; font-size: 24px; font-weight: 700; margin-top: 4px; }
+.wih-card .style { color: var(--sub); font-size: 13px; margin-top: 6px; }
+.wih-card .hours-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--sub); text-align: right; }
+.wih-card .hours-val { font-family: 'Space Grotesk'; font-size: 20px; font-weight: 700; text-align: right; line-height: 1.25; }
+
+/* The WIH card now shows two figures side by side — this viewer's own
+   hours, and the whole team's combined hours (the WIH's timesheet is
+   shared by everyone allocated to it). */
+.hours-block-group { display: flex; gap: 22px; }
+
+.wih-info-row { display: flex; align-items: center; gap: 12px; }
+.wih-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); cursor: pointer; flex-shrink: 0; }
+
+.image-modal { position: relative; max-width: 100%; max-height: 90vh; }
+.image-modal img { max-width: 100%; max-height: 90vh; border-radius: 10px; display: block; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.image-modal-close {
+  position: absolute; top: -14px; right: -14px; width: 32px; height: 32px; border-radius: 50%;
+  background: #fff; border: none; font-size: 20px; line-height: 1; cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;
+}
+
+/* Shown once a submitted timesheet carries a supervisor-confirmed final
+   hours figure (final_hrs) — separate from, and doesn't change, the raw
+   MY HOURS / TEAM TOTAL figures above it. */
+.final-hrs-card {
+  background: #eef9f1; border: 1px solid #bfe6cb; border-radius: var(--radius);
+  padding: 14px 16px; margin-bottom: 22px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.final-hrs-card .hours-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #1a7a3e; }
+.final-hrs-card .hours-val { font-family: 'Space Grotesk'; font-weight: 700; font-size: 18px; color: #125c2e; }
+
+/* Shown to a Timesheet Manager when a teammate's timer is still running
+   and blocking submit — see running_timer_users in api.py. */
+.warning-box {
+  background: #fff7e6; border: 1px solid #f5cf87; color: #92600a;
+  padding: 10px 12px; border-radius: 8px; font-size: 12px; line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+/* Shown to non-managers on a Draft sheet in place of a Submit button. */
+.info-note { color: var(--sub); font-size: 11px; text-align: center; margin-bottom: 18px; line-height: 1.5; }
+
+.timer-btn {
+  width: 100%; padding: 26px; border-radius: 10px; border: none; cursor: pointer;
+  font-family: 'Space Grotesk'; font-weight: 700; text-transform: uppercase;
+  font-size: 20px; display: flex; align-items: center; justify-content: center; gap: 12px;
+  margin-bottom: 22px;
+}
+.timer-running { background: #b8302a; color: #fff; box-shadow: 0 8px 20px rgba(184,48,42,0.25); }
+
+.entries-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+.entries-head { padding: 16px 18px; border-bottom: 1px solid var(--line); font-family: 'Space Grotesk'; font-weight: 700; font-size: 15px; }
+.entries-cols { display: grid; grid-template-columns: 1.1fr 0.7fr 0.7fr 1fr 0.9fr 0.3fr; padding: 10px 18px; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; color: var(--sub); border-bottom: 1px solid var(--line); }
+.entry-row { display: grid; grid-template-columns: 1.1fr 0.7fr 0.7fr 1fr 0.9fr 0.3fr; padding: 12px 18px; font-size: 12px; align-items: center; border-bottom: 1px solid #f0f1f3; }
+.entry-row:last-child { border-bottom: none; }
+.entry-row .del { color: var(--danger); cursor: pointer; background: none; border: none; font-size: 14px; }
+.entry-row .running-badge { color: var(--accent-green); font-weight: 700; }
+.entry-row .edit-time { cursor: pointer; border-bottom: 1px dashed var(--sub); }
+.entry-row .edit-time:hover { color: var(--accent-green-dark); border-bottom-color: var(--accent-green-dark); }
+.time-edit-wrap { display: inline-flex; align-items: center; gap: 4px; }
+.time-edit-wrap .time-input { font-size: 12px; padding: 2px 4px; border: 1px solid var(--line); border-radius: 6px; width: 92px; }
+.time-edit-wrap .time-confirm,
+.time-edit-wrap .time-cancel { border: none; background: none; cursor: pointer; font-size: 13px; padding: 0 2px; line-height: 1; }
+.time-edit-wrap .time-confirm { color: var(--accent-green-dark); }
+.time-edit-wrap .time-cancel { color: var(--danger); }
+
+/* ---------- My Timesheet report (date-wise, per WIH) ---------- */
+.report-cols {
+  display: grid; grid-template-columns: 0.9fr 1.7fr 1fr 0.9fr;
+  padding: 10px 18px; font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--sub); border-bottom: 1px solid var(--line);
+}
+.report-row {
+  display: grid; grid-template-columns: 0.9fr 1.7fr 1fr 0.9fr;
+  padding: 12px 18px; font-size: 12px; align-items: center;
+  border-bottom: 1px solid #f0f1f3; cursor: pointer;
+}
+.report-row:last-child { border-bottom: none; }
+.report-row:active { background: var(--bg); }
+.report-row .report-wih { font-weight: 700; }
+.report-row .report-style { font-size: 10px; color: var(--sub); margin-top: 2px; }
+.report-row .hrs { font-family: 'Space Grotesk'; font-weight: 700; }
+.report-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 18px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 13px;
+  background: var(--bg); border-top: 1px solid var(--line);
+}
+
+.manual-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+.manual-head { padding: 18px 20px 14px; border-bottom: 1px solid var(--line); }
+.manual-head .title { display: flex; align-items: center; gap: 8px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 16px; cursor: pointer; }
+.manual-head p { color: var(--sub); font-size: 11px; margin-top: 6px; letter-spacing: 0.04em; }
+.manual-body { padding: 18px 20px; }
+
+.toast {
+  position: fixed; bottom: calc(20px + var(--safe-bottom)); left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 8px; font-size: 12px;
+  z-index: 50; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-width: 90vw; text-align: center;
+}
+
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 60; padding: 20px; }
+.modal { background: #fff; border-radius: var(--radius); padding: 24px; max-width: 400px; width: 100%; }
+.modal h3 { font-size: 18px; margin-bottom: 12px; }
+.modal p { color: var(--sub); font-size: 13px; line-height: 1.5; margin-bottom: 20px; }
+.modal .row { display: flex; gap: 10px; }
+
+.spinner {
+  width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
+  border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-center { display: flex; align-items: center; justify-content: center; height: 60vh; color: var(--sub); font-size: 13px; }
+
+/* =====================================================================
+   SHARED-DEVICE ADDITIONS (shared_timesheet)
+   ===================================================================== */
+.toast { z-index: 300; }
+.screen.wide { max-width: 980px; }
+
+/* ---------- Home: "Who's working?" worker tiles ---------- */
+.home-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.home-head h1 { font-size: 26px; }
+.home-head .clock { font-family: 'Space Grotesk'; font-weight: 700; font-size: 22px; color: var(--sub); }
+.home-sub { color: var(--sub); font-size: 12px; margin: 4px 0 0; letter-spacing: 0.04em; }
+.worker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.worker-tile {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 12px 14px; text-align: center; cursor: pointer; position: relative;
+  transition: transform 0.08s ease; user-select: none;
+}
+.worker-tile:active { transform: scale(0.97); background: var(--bg); }
+.worker-tile.is-running { border-color: var(--accent-green); box-shadow: 0 0 0 2px rgba(26,158,70,0.18); }
+.worker-tile.is-disabled { opacity: 0.55; }
+.avatar-circle {
+  width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 10px; overflow: hidden;
+  background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk'; font-weight: 700; font-size: 26px;
+}
+.avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+.worker-tile .w-name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 15px; line-height: 1.2; word-break: break-word; }
+.worker-tile .w-status { font-size: 10px; margin-top: 8px; color: var(--sub); letter-spacing: 0.03em; line-height: 1.4; }
+.worker-tile .w-status.run { color: var(--accent-green-dark); font-weight: 700; }
+.worker-tile .w-status.warn { color: #92600a; font-weight: 700; }
+.worker-tile .w-status.err { color: var(--danger); font-weight: 700; }
+
+/* ---------- PIN pad ---------- */
+.pin-modal { max-width: 360px; text-align: center; padding: 20px 20px 16px; }
+.pin-who { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; text-align: left; }
+.pin-who .avatar-circle { width: 48px; height: 48px; font-size: 18px; margin: 0; flex-shrink: 0; }
+.pin-who .nm { font-family: 'Space Grotesk'; font-weight: 700; font-size: 18px; }
+.pin-who .hint { font-size: 11px; color: var(--sub); margin-top: 2px; }
+.cam-wrap { position: relative; width: 132px; height: 132px; margin: 4px auto 10px; border-radius: 50%; overflow: hidden; background: #111; border: 3px solid var(--line); }
+.cam-wrap video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+.cam-wrap .cam-off { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 11px; padding: 14px; line-height: 1.4; }
+.cam-note { font-size: 10px; color: var(--sub); margin-bottom: 10px; letter-spacing: 0.03em; }
+.pin-dots { display: flex; justify-content: center; gap: 12px; margin: 6px 0 12px; min-height: 18px; }
+.pin-dots span { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--ink); }
+.pin-dots span.on { background: var(--ink); }
+.pin-err { min-height: 18px; color: var(--danger); font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.keypad button {
+  padding: 16px 0; font-family: 'Space Grotesk'; font-weight: 700; font-size: 22px;
+  border-radius: 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer;
+}
+.keypad button:active { background: var(--bg); }
+.keypad button.k-ok { background: var(--accent-green); color: #fff; border-color: var(--accent-green); font-size: 16px; }
+.keypad button.k-ok:disabled { opacity: 0.4; }
+.keypad button.k-del { font-size: 18px; }
+.pin-cancel { margin-top: 12px; background: none; border: none; color: var(--sub); font-weight: 700; font-size: 12px; letter-spacing: 0.06em; cursor: pointer; padding: 8px; }
+.shake { animation: shake 0.35s; }
+@keyframes shake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+
+/* ---------- Worker bar (who is signed in + countdown) ---------- */
+.worker-bar {
+  background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 10px 18px; font-size: 12px; position: sticky; top: 0; z-index: 11;
+}
+.worker-bar .wb-name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.worker-bar .wb-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.worker-bar .wb-count { color: #b9bec7; font-size: 11px; }
+.worker-bar .wb-done {
+  background: var(--accent-green); color: #fff; border: none; border-radius: 8px; padding: 9px 14px;
+  font-family: 'Space Grotesk'; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer;
+}
+.worker-bar { padding-top: calc(10px + var(--safe-top)); }
+.worker-bar + .topbar { position: static; padding-top: 14px; }
+.worker-bar ~ .screen .timer-topbar { padding-top: 0; }
+
+/* ---------- Big confirmation after Start / Stop ---------- */
+.success-overlay {
+  position: fixed; inset: 0; z-index: 250; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 30px; color: #fff; animation: fadein 0.15s ease;
+}
+.success-overlay.start { background: var(--accent-green); }
+.success-overlay.stop { background: #b8302a; }
+.success-overlay .big { font-size: 72px; line-height: 1; margin-bottom: 14px; }
+.success-overlay h2 { font-size: 30px; }
+.success-overlay .who { font-family: 'Space Grotesk'; font-weight: 700; font-size: 22px; margin-top: 14px; }
+.success-overlay .what { font-size: 14px; margin-top: 8px; opacity: 0.9; }
+.success-overlay .tap { font-size: 11px; margin-top: 26px; opacity: 0.75; letter-spacing: 0.06em; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+.home-foot { text-align: center; color: var(--sub); font-size: 10px; letter-spacing: 0.05em; margin-top: 26px; }
+
+/* ---------- Face check / registration ---------- */
+.cam-wrap.big { width: 210px; height: 210px; }
+.cam-wrap.scanning { border-color: var(--accent-green); box-shadow: 0 0 0 4px rgba(26,158,70,0.18); }
+.face-status { font-family: 'Space Grotesk'; font-weight: 700; font-size: 16px; min-height: 22px; margin: 4px 0 6px; }
+.face-sub { font-size: 11px; color: var(--sub); margin-bottom: 10px; line-height: 1.4; }
+.face-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.face-actions .btn { padding: 13px; font-size: 13px; }
+.reg-dots { display: flex; justify-content: center; gap: 8px; margin: 6px 0 10px; }
+.reg-dots span { width: 12px; height: 12px; border-radius: 50%; background: var(--line); }
+.reg-dots span.on { background: var(--accent-green); }
+.check-row { display: flex; align-items: flex-start; gap: 8px; text-align: left; font-size: 12px; line-height: 1.4; margin: 6px 0 10px; font-weight: 400; letter-spacing: 0; }
+.check-row input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; margin: 0; padding: 0; }
+.face-row { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px; }
+.face-row .avatar-circle { width: 44px; height: 44px; font-size: 16px; margin: 0; flex-shrink: 0; }
+.face-row .fr-main { flex: 1; min-width: 0; }
+.face-row .fr-name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 15px; }
+.face-row .fr-st { font-size: 11px; color: var(--sub); margin-top: 2px; }
+.face-row .fr-st.ok { color: var(--accent-green-dark); font-weight: 700; }
+.face-row .fr-btns { display: flex; gap: 6px; flex-shrink: 0; }
+.face-row .fr-btns .btn { width: auto; padding: 9px 12px; font-size: 11px; }
+.worker-tile .w-face { position: absolute; top: 8px; right: 10px; font-size: 13px; opacity: 0.6; }
+
+/* ---------- Timesheet list + team screen ---------- */
+.ts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.ts-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; cursor: pointer; user-select: none; }
+.ts-card:active { transform: scale(0.98); background: var(--bg); }
+.ts-card.is-running { border-color: var(--accent-green); box-shadow: 0 0 0 2px rgba(26,158,70,0.18); }
+.ts-card .ts-wih { font-family: 'Space Grotesk'; font-weight: 700; font-size: 18px; }
+.ts-card .ts-style { font-size: 12px; color: var(--sub); margin-top: 2px; min-height: 16px; }
+.ts-card .ts-meta { display: flex; justify-content: space-between; gap: 8px; font-size: 10px; color: var(--sub); margin-top: 12px; letter-spacing: 0.03em; }
+.ts-card .ts-live { color: var(--accent-green-dark); font-weight: 700; }
+.team-list { display: flex; flex-direction: column; gap: 10px; }
+.team-row { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.team-row.is-running { border-color: var(--accent-green); }
+.team-row .avatar-circle { width: 52px; height: 52px; font-size: 18px; margin: 0; flex-shrink: 0; }
+.team-row .tr-main { flex: 1; min-width: 0; }
+.team-row .tr-name { font-family: 'Space Grotesk'; font-weight: 700; font-size: 17px; }
+.team-row .tr-st { font-size: 11px; color: var(--sub); margin-top: 3px; }
+.team-row .tr-st .run { color: var(--accent-green-dark); font-weight: 700; }
+.team-row .tr-st .warn { color: #92600a; font-weight: 700; }
+.team-btn { flex-shrink: 0; border: none; border-radius: 10px; padding: 16px 18px; min-width: 104px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 15px; text-transform: uppercase; color: #fff; cursor: pointer; }
+.team-btn.start { background: var(--accent-green); }
+.team-btn.stop { background: #b8302a; }
+.team-btn:disabled { background: var(--line); color: var(--sub); cursor: default; }

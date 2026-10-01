@@ -1,0 +1,2 @@
+# No extra Python dependencies — this app only uses the Frappe framework
+# APIs that are already available inside any Frappe/ERPNext bench.

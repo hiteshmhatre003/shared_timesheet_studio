@@ -1,0 +1,162 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:user",
+ "creation": "2026-09-30 10:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "full_name",
+  "enabled",
+  "column_break_main",
+  "photo",
+  "pin_section",
+  "new_pin",
+  "column_break_pin",
+  "has_pin",
+  "pin_last_changed",
+  "face_section",
+  "has_face",
+  "column_break_face",
+  "face_registered_on"
+ ],
+ "fields": [
+  {
+   "description": "The ERPNext user this worker's time is logged against (same user you add in Timesheet Allocation).",
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "user.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "description": "Untick to hide this worker from the kiosk screen.",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Optional. Shown on the worker's tile so people can find their name quickly.",
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "pin_section",
+   "fieldtype": "Section Break",
+   "label": "Kiosk PIN"
+  },
+  {
+   "description": "Type a 4-6 digit PIN and click Save. It is stored securely and can never be viewed again - if forgotten, just set a new one here. Workers can also change it themselves on the kiosk.",
+   "fieldname": "new_pin",
+   "fieldtype": "Password",
+   "label": "Set / Reset PIN"
+  },
+  {
+   "fieldname": "column_break_pin",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_pin",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "PIN Set",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pin_last_changed",
+   "fieldtype": "Datetime",
+   "label": "PIN Last Changed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "face_section",
+   "fieldtype": "Section Break",
+   "label": "Face Recognition"
+  },
+  {
+   "default": "0",
+   "description": "Faces are registered on the kiosk tablet by a Timesheet Manager (menu \u2192 Register Faces).",
+   "fieldname": "has_face",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Face Registered",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_face",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "face_registered_on",
+   "fieldtype": "Datetime",
+   "label": "Face Registered On",
+   "read_only": 1
+  }
+ ],
+ "image_field": "photo",
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-09-30 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Shared Timesheet",
+ "name": "Kiosk Worker",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Timesheet Manager",
+   "share": 0,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Kiosk Device"
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name",
+ "track_changes": 1
+}
